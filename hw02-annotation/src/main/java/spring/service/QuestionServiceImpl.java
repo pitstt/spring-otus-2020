@@ -15,6 +15,8 @@ public class QuestionServiceImpl implements QuestionService {
 
     private final QuestionDao dao;
 
+    private final Scanner scanner;
+
     @Override
     public List<Question> getAll() throws IOException {
         return dao.getAllQuestion();
@@ -23,7 +25,6 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void start() throws IOException {
         int success = 0, fail = 0;
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your name: ");
         String name = scanner.nextLine();
         System.out.println("Enter your surname: ");

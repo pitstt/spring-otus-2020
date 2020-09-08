@@ -8,6 +8,7 @@ import spring.domain.Question;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -22,12 +23,17 @@ class QuestionServiceImplTest {
     @BeforeEach
     void setUp() {
         questionDao = mock(QuestionDaoSimple.class);
-        questionService = new QuestionServiceImpl(questionDao);
+        questionService = new QuestionServiceImpl(questionDao, mock(Scanner.class));
     }
 
     @Test
     void getAll() throws IOException {
-        when(questionDao.getAllQuestion()).thenReturn(Collections.singletonList(new Question("2+2=?","4")));
-        assertEquals(1,questionService.getAll().size());
+        when(questionDao.getAllQuestion()).thenReturn(Collections.singletonList(new Question("2+2=?", "4")));
+        assertEquals(1, questionService.getAll().size());
+    }
+
+    @Test
+    void start() throws IOException {
+        questionService.start();
     }
 }
