@@ -22,6 +22,7 @@
     <modules>
         <module>hw01-xml</module>
         <module>hw02-annotation</module>
+        <module>hw03-spring-boot</module>
     </modules>
 
     <dependencyManagement>

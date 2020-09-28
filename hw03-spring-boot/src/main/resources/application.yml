@@ -1,0 +1,7 @@
+server:
+  port: 8080
+
+application:
+  locale: ru_RU
+  resource: questions.csv
+  startMethodEnable: true
