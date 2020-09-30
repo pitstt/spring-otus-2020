@@ -7,9 +7,9 @@ import lombok.Data;
 @AllArgsConstructor
 public class User {
 
-    String name;
+   private final String name;
 
-    String surName;
+    private final String surName;
 
     @Override
     public String toString() {

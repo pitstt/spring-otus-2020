@@ -2,6 +2,7 @@ package ru.otus.springshell.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.context.MessageSource;
 import ru.otus.springshell.AppProperty;
 import ru.otus.springshell.dao.QuestionDao;
@@ -23,10 +24,13 @@ class QuestionServiceImplTest {
 
     private QuestionService questionService;
 
+    @Mock
+    private Scanner scanner;
+
     @BeforeEach
     void setUp() {
         questionDao = mock(QuestionDaoSimple.class);
-        questionService = new QuestionServiceImpl(questionDao, mock(Scanner.class), mock(MessageSource.class),
+        questionService = new QuestionServiceImpl(questionDao, scanner, mock(MessageSource.class),
                 mock(AppProperty.class));
         questionService.createUser("name", "surname");
     }
@@ -39,9 +43,9 @@ class QuestionServiceImplTest {
 
     @Test
     void createUser() {
-       User user = questionService.createUser("name", "surname");
-       assertEquals("name", user.getName());
-       assertEquals("surname", user.getSurName());
+        User user = questionService.createUser("name", "surname");
+        assertEquals("name", user.getName());
+        assertEquals("surname", user.getSurName());
     }
 
     @Test
