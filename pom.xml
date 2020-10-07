@@ -25,6 +25,7 @@
         <module>hw03-spring-boot</module>
         <module>hw04-spring-shell</module>
         <module>hw-05-jdbc</module>
+        <module>hw-06-jpql</module>
     </modules>
 
     <dependencyManagement>
