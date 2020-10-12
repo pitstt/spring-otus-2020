@@ -9,10 +9,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import ru.otus.hw06jpql.domain.Author;
 import ru.otus.hw06jpql.domain.Book;
-import ru.otus.hw06jpql.domain.Comment;
 import ru.otus.hw06jpql.domain.Genre;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,18 +60,13 @@ class BookRepositoryJpaTest {
         book.setAuthor(author);
         book.setGenre(genre);
 
-        Comment comment = new Comment();
-        comment.setText("good");
-        book.setComments(Collections.singletonList(comment));
-
         Book newBook = bookRepositoryJpa.insertOrUpdate(book);
         Book expectedBook = em.find(Book.class, newBook.getId());
         Assertions.assertThat(expectedBook).isNotNull()
                 .matches(b -> b.getId() == newBook.getId())
                 .matches(b -> b.getName().equals(newBook.getName()))
                 .matches(b -> b.getAuthor().equals(newBook.getAuthor()))
-                .matches(b -> b.getGenre().equals(newBook.getGenre()))
-                .matches(b -> b.getComments() != null && b.getComments().size() > 0 );
+                .matches(b -> b.getGenre().equals(newBook.getGenre()));
     }
 
     @Test

@@ -13,7 +13,6 @@ import ru.otus.hw06jpql.domain.Author;
 import ru.otus.hw06jpql.domain.Book;
 import ru.otus.hw06jpql.domain.Genre;
 
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -42,7 +41,7 @@ public class BookShell {
         if (genre == null) {
             return "Жанр c id = " + genreId + " не зарегистрирован в системе!";
         }
-        Book book = new Book(id, name, author, genre, new ArrayList<>());
+        Book book = new Book(id, name, author, genre);
         bookRepository.insertOrUpdate(book);
         return "Книга " + book.toString() + " зарегистрирована в системе!";
     }

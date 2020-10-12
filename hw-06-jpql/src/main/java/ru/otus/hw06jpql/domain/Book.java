@@ -31,9 +31,6 @@ public class Book {
     @OneToOne(targetEntity = Genre.class, cascade = CascadeType.ALL)
     private Genre genre;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Comment> comments;
-
     @Override
     public String toString() {
         return "id=" + id + " " + name + " " + author + " " + genre;

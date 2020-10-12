@@ -6,6 +6,8 @@ import ru.otus.hw06jpql.domain.Comment;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -27,6 +29,16 @@ public class CommentRepositoryJpa implements CommentRepository {
     @Override
     public Optional<Comment> getById(long id) {
         return Optional.ofNullable(em.find(Comment.class, id));
+    }
+
+    @Override
+    public List<Comment> getCommentsByBookId(long id){
+        TypedQuery<Comment> query = em.createQuery("select c " +
+                        "from Comment c " +
+                        "where c.book.id = :id",
+                Comment.class);
+        query.setParameter("id", id);
+        return query.getResultList();
     }
 
     @Override
