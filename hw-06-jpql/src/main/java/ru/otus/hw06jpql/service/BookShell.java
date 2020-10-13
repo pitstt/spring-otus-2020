@@ -6,6 +6,7 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 import org.springframework.transaction.annotation.Transactional;
+import ru.otus.hw06jpql.domain.Comment;
 import ru.otus.hw06jpql.repository.AuthorRepository;
 import ru.otus.hw06jpql.repository.BookRepository;
 import ru.otus.hw06jpql.repository.GenreRepository;
@@ -13,6 +14,8 @@ import ru.otus.hw06jpql.domain.Author;
 import ru.otus.hw06jpql.domain.Book;
 import ru.otus.hw06jpql.domain.Genre;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -41,7 +44,7 @@ public class BookShell {
         if (genre == null) {
             return "Жанр c id = " + genreId + " не зарегистрирован в системе!";
         }
-        Book book = new Book(id, name, author, genre);
+        Book book = new Book(id, name, author, genre, Collections.emptyList());
         bookRepository.insertOrUpdate(book);
         return "Книга " + book.toString() + " зарегистрирована в системе!";
     }
@@ -70,6 +73,11 @@ public class BookShell {
     public String removeById(@ShellOption({"bookId", "id"}) long id) {
         bookRepository.remove(id);
         return "Книга с id = " + id + " удалена!";
+    }
+
+    @Transactional(readOnly = true)
+    public List<Comment> getCommentsByBook(Book book) {
+        return book.getComments();
     }
 
     private Genre getGenre(long genreId) {

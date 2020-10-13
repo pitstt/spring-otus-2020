@@ -50,15 +50,6 @@ class CommentRepositoryJpaTest {
     }
 
     @Test
-    void getCommentsByBookId() {
-        List<Comment> comments = commentRepository.getCommentsByBookId(1L);
-        assertEquals(3, comments.size());
-        assertThat(comments).matches(c -> c.get(0).getText().equals("good"))
-                .matches(c -> c.get(1).getText().equals("bad"))
-                .matches(c -> c.get(2).getText().equals("not bad"));
-    }
-
-    @Test
     void remove() {
         Comment firstComment = em.find(Comment.class, 1L);
         assertThat(firstComment).isNotNull();

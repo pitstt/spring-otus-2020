@@ -9,9 +9,7 @@ import ru.otus.hw06jpql.domain.Comment;
 import ru.otus.hw06jpql.repository.BookRepositoryJpa;
 import ru.otus.hw06jpql.repository.CommentRepositoryJpa;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @ShellComponent
 @RequiredArgsConstructor
@@ -41,15 +39,6 @@ public class CommentShell {
         } else {
             return "Комментарий не найден!";
         }
-    }
-
-    @Transactional(readOnly = true)
-    @ShellMethod(key = "commentsBookIdById", value = "Введите id (Например: commentsBookIdById 1)")
-    public String getCommentsByBookId(@ShellOption({"bookId", "id"}) long id) {
-        List<Comment> comments = commentRepositoryJpa.getCommentsByBookId(id);
-        return comments.stream()
-                .map(Comment::toString)
-                .collect(Collectors.joining("\n", "", ""));
     }
 
     @Transactional
