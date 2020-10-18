@@ -26,6 +26,7 @@
         <module>hw04-spring-shell</module>
         <module>hw-05-jdbc</module>
         <module>hw-06-jpql</module>
+        <module>hw07-data</module>
     </modules>
 
     <dependencyManagement>
