@@ -47,15 +47,18 @@ public class BookShell {
         }
         Book book = new Book(id, name, author, genre, Collections.emptyList());
         bookRepository.save(book);
-        return "Книга " + book.toString() + " зарегистрирована в системе!";
+        return "Книга " + book.getName() + " " + book.getAuthor().getName() +
+                book.getAuthor().getSurname() + " " + book.getGenre().getName() + " зарегистрирована в системе!";
     }
 
     @Transactional(readOnly = true)
     @ShellMethod(key = "bookById", value = "Введите id (Например: bookById 1)")
     public String getById(@ShellOption({"bookById", "id"}) long id) {
-        Optional<Book> book = bookRepository.findById(id);
-        if (book.isPresent()) {
-            return book.get().toString();
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        if (optionalBook.isPresent()) {
+            Book book = optionalBook.get();
+            return book.getName() + " " + book.getAuthor().getName() + " " +
+                    book.getAuthor().getSurname() + " " + book.getGenre().getName();
         } else {
             return "Книга не найдена!";
         }

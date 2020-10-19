@@ -31,9 +31,4 @@ public class Book {
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Comment> comments;
-
-    @Override
-    public String toString() {
-        return "id=" + id + " " + name + " " + author + " " + genre;
-    }
 }

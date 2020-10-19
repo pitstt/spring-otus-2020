@@ -22,7 +22,7 @@ public class GenreShell {
                               @ShellOption({"genreName", "gn"}) String name) {
         Genre genre = new Genre(id, name);
         genreRepository.save(genre);
-        return "Жанр " + genre.toString() + " зарегистрирован в системе!";
+        return "Жанр " + genre.getName() + " зарегистрирован в системе!";
     }
 
     @Transactional(readOnly = true)
@@ -30,7 +30,7 @@ public class GenreShell {
     public String getById(@ShellOption({"genreId", "id"}) long id) {
         Optional<Genre> genre = genreRepository.findById(id);
         if (genre.isPresent()) {
-            return genre.get().toString();
+            return genre.get().getName();
         } else {
             return "Жанр с таким id не найден!";
         }

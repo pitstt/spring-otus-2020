@@ -23,15 +23,16 @@ public class AuthorShell {
                                @ShellOption({"authorSurname", "us"}) String surname) {
         Author author = new Author(id, name, surname);
         authorRepository.save(author);
-        return "Автор " + author.toString() + " зарегистрирован в системе!";
+        return "Автор " + author.getName() + " " + author.getSurname() + " зарегистрирован в системе!";
     }
 
     @Transactional(readOnly = true)
     @ShellMethod(key = "authorById", value = "Введите id (Например: authorById 1)")
     public String getById(@ShellOption({"authorId", "id"}) long id) {
-        Optional<Author> author = authorRepository.findById(id);
-        if (author.isPresent()) {
-            return author.toString();
+        Optional<Author> optionalAuthor = authorRepository.findById(id);
+        if (optionalAuthor.isPresent()) {
+            Author author = optionalAuthor.get();
+            return author.getName() + " " + author.getSurname();
         } else {
             return "Автор не найден!";
         }
