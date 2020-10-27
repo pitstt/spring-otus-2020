@@ -1,0 +1,10 @@
+insert into author (`name`, `surname`) values ('Рей', 'Брэдбери');
+insert into author (`name`, `surname`) values ('Джордж', 'Оруэлл');
+insert into genre (`name`) values ('Антиутопия');
+insert into genre (`name`) values ('Роман');
+insert into book (`name`,`author_id`,`genre_id`) values ('Вино из одуванчиков', 1,2);
+insert into book (`name`,`author_id`,`genre_id`) values ('1984',2,1);
+insert into comment (`text`,`book_id`) values ('good',1);
+insert into comment (`text`,`book_id`) values ('bad',1);
+insert into comment (`text`,`book_id`) values ('not bad',1);
+insert into comment (`text`,`book_id`) values ('not bad',2);
