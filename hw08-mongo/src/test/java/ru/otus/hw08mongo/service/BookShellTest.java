@@ -3,14 +3,14 @@ package ru.otus.hw08mongo.service;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.otus.hw08mongo.domain.Book;
+import org.springframework.test.annotation.DirtiesContext;
 import ru.otus.hw08mongo.domain.Comment;
 import ru.otus.hw08mongo.repository.BookRepository;
+import ru.otus.hw08mongo.repository.CommentRepository;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class BookShellTest {
@@ -20,6 +20,9 @@ class BookShellTest {
 
     @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
     @Test
     void createBook() {
@@ -53,9 +56,11 @@ class BookShellTest {
     }
 
     @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
     void removeById() {
         String result = bookShell.removeById("1");
         assertThat(result).isNotEmpty().matches("Книга с id = 1 удалена!");
+        assertThat(commentRepository.findAll().size()).isEqualTo(1);
     }
 
     @Test

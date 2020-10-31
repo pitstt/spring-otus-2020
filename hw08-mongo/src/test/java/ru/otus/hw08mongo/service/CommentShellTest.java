@@ -14,8 +14,14 @@ class CommentShellTest {
 
     @Test
     void createComment() {
-        String result = commentShell.createComment("Test");
+        String result = commentShell.createComment("1","Test");
         assertThat(result).isNotEmpty().matches("Комментарий Test зарегистрирован в системе!");
+    }
+
+    @Test
+    void createCommentWithBadBookId() {
+        String result = commentShell.createComment("11","Test");
+        assertThat(result).isNotEmpty().matches("Книга с id 11 не найдена!");
     }
 
     @Test
