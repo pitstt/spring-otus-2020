@@ -9,7 +9,6 @@ import ru.otus.hw08mongo.domain.Comment;
 import ru.otus.hw08mongo.domain.Genre;
 import ru.otus.hw08mongo.repository.AuthorRepository;
 import ru.otus.hw08mongo.repository.BookRepository;
-import ru.otus.hw08mongo.repository.CommentRepository;
 import ru.otus.hw08mongo.repository.GenreRepository;
 
 import java.util.Arrays;
@@ -36,23 +35,19 @@ public class DatabaseChangelog {
         authorRepository.saveAll(Arrays.asList(reyAuthor, georgeAuthor));
     }
 
-    @ChangeSet(order = "004", id = "insertComments", author = "pitstt", runAlways = true)
-    public void insertComments(BookRepository bookRepository, CommentRepository commentRepository) {
-        Comment comment = new Comment("1", "good");
-        Comment comment2 = new Comment("2", "bad");
-        Comment comment3 = new Comment("3", "not bad");
-        Comment comment4 = new Comment("4", "not bad");
-        commentRepository.saveAll(Arrays.asList(comment, comment2, comment3, comment4));
-    }
 
-    @ChangeSet(order = "005", id = "insertBook", author = "pitstt", runAlways = true)
+    @ChangeSet(order = "004", id = "insertBook", author = "pitstt", runAlways = true)
     public void insertBook(BookRepository bookRepository, GenreRepository genreRepository,
-                           AuthorRepository authorRepository, CommentRepository commentRepository) {
+                           AuthorRepository authorRepository) {
+        Comment comment = new Comment("good");
+        Comment comment2 = new Comment("bad");
+        Comment comment3 = new Comment("not bad");
+        Comment comment4 = new Comment("not bad");
         Book book = new Book("1", "Вино из одуванчиков", authorRepository.findById("1").get(),
-                genreRepository.findById("2").get(), Arrays.asList(commentRepository.findById("1").get(),
-                commentRepository.findById("2").get(), commentRepository.findById("3").get()));
+                genreRepository.findById("2").get(), Arrays.asList(comment,
+                comment2, comment3));
         Book book2 = new Book("2", "1984", authorRepository.findById("2").get(), genreRepository.findById("1").get(),
-                Arrays.asList(commentRepository.findById("4").get()));
+                Arrays.asList(comment4));
         bookRepository.saveAll(Arrays.asList(book, book2));
     }
 }

@@ -14,19 +14,13 @@ class CommentShellTest {
 
     @Test
     void createComment() {
-        String result = commentShell.createComment("Test");
+        String result = commentShell.createComment("1","Test");
         assertThat(result).isNotEmpty().matches("Комментарий Test зарегистрирован в системе!");
     }
 
     @Test
-    void getById() {
-        String result = commentShell.getById("1");
-        assertThat(result).isNotEmpty().matches("good");
-    }
-
-    @Test
-    void removeById() {
-        String result = commentShell.removeById("1");
-        assertThat(result).isNotEmpty().matches("Комментарий с id = 1 удален!");
+    void createCommentBadBookId() {
+        String result = commentShell.createComment("11","Test");
+        assertThat(result).isNotEmpty().matches("Книга с id 11 не найдена!");
     }
 }

@@ -22,7 +22,7 @@ class BookRepositoryTest {
     void saveAndFindById(@Autowired BookRepository bookRepository) {
         Author author = new Author("3", "Test", "Test");
         Genre genre = new Genre("3", "Test");
-        Comment comment = new Comment("3", "Test");
+        Comment comment = new Comment("Test");
         Book book = new Book("3", "test", author, genre, Arrays.asList(comment));
         bookRepository.save(book);
         assertThat(bookRepository.findById("3")).isNotEmpty().hasValue(book);
@@ -38,7 +38,7 @@ class BookRepositoryTest {
     void createAndRemove(@Autowired BookRepository bookRepository) {
         Author author = new Author("3", "Test", "Test");
         Genre genre = new Genre("3", "Test");
-        Comment comment = new Comment("3", "Test");
+        Comment comment = new Comment("Test");
         Book book = new Book("3", "test", author, genre, Arrays.asList(comment));
         bookRepository.save(book);
         assertThat(bookRepository.findById("3")).isNotEmpty().hasValue(book);

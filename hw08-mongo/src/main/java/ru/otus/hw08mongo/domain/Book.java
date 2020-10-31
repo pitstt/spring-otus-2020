@@ -20,4 +20,8 @@ public class Book {
     private Author author;
     private Genre genre;
     private List<Comment> comments;
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
 }
