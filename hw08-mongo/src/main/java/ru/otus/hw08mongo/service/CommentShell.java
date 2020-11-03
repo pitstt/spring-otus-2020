@@ -28,7 +28,6 @@ public class CommentShell {
         comment.setText(text);
         Optional<Book> optionalBook = bookRepository.findById(bookId);
         if (optionalBook.isPresent()) {
-            commentRepository.save(comment);
             Book book = optionalBook.get();
             book.addComment(comment);
             bookRepository.save(book);
