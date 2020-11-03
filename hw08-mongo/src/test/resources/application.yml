@@ -1,0 +1,13 @@
+spring:
+  shell:
+    interactive:
+      enabled: false
+
+mongock:
+  runner-type: "ApplicationRunner"
+  change-logs-scan-package:
+    - ru.otus.hw08mongo.mongock.changelog
+
+logging:
+  level:
+    ROOT: ERROR
