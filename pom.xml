@@ -28,6 +28,7 @@
         <module>hw-06-jpql</module>
         <module>hw07-data</module>
         <module>hw08-mongo</module>
+        <module>hw09-thymeleaf</module>
     </modules>
 
     <dependencyManagement>
