@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.otus.hw09thymeleaf.domain.Author;
 import ru.otus.hw09thymeleaf.repository.AuthorRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -25,8 +26,18 @@ public class AuthorService {
     }
 
     @Transactional
-    public Author create(Author author) {
+    public Author createOrUpdate(Author author) {
         return authorRepository.save(author);
+    }
+
+    @Transactional
+    public void removeById(String id) {
+        authorRepository.deleteById(id);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Author> getAll() {
+        return authorRepository.findAll();
     }
 
 }

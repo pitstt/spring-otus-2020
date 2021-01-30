@@ -1,0 +1,8 @@
+mongock:
+  runner-type: "ApplicationRunner"
+  change-logs-scan-package:
+    - ru.otus.hw09thymeleaf.changelog
+
+logging:
+  level:
+    ROOT: ERROR
