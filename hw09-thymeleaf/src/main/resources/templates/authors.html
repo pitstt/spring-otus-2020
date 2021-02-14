@@ -20,7 +20,7 @@
             <td th:utext="${author.name}">...</td>
             <td th:utext="${author.surname}">...</td>
             <td><a th:href="@{/updateAuthor/{id}(id=${author.id})}" class="btn btn-danger">Update</a></td>
-            <td><a th:href="@{/delete/{id}(id=${author.id})}" class="btn btn-danger">Delete</a></td>
+            <td><a th:href="@{/author/delete/{id}(id=${author.id})}" class="btn btn-danger">Delete</a></td>
         </tr>
     </table>
 </div>

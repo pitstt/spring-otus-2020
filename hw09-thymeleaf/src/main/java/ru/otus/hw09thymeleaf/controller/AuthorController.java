@@ -3,6 +3,7 @@ package ru.otus.hw09thymeleaf.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,14 +21,14 @@ public class AuthorController {
     public String showAddAuthorPage(Model model) {
         Author author = new Author();
         model.addAttribute("author", author);
-        return "addAuthor";
+        return "createOrUpdateAuthor";
     }
 
     @GetMapping("/updateAuthor/{id}")
     public String showUpdateAuthorPage(Model model, @PathVariable("id") String id) {
         final Author author = authorService.getById(id);
         model.addAttribute("author", author);
-        return "updateAuthor";
+        return "createOrUpdateAuthor";
     }
 
     @GetMapping("/authors")
@@ -37,13 +38,16 @@ public class AuthorController {
     }
 
     @PostMapping("/author")
-    public String createOrUpdateAuthor(@ModelAttribute("author") Author author) {
+    public String createOrUpdate(@ModelAttribute("author") Author author) {
+        if(!StringUtils.hasText(author.getId())){
+            author.setId(null);
+        }
         authorService.createOrUpdate(author);
         return "redirect:/authors";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteAuthor(@PathVariable("id") String id) {
+    @GetMapping("/author/delete/{id}")
+    public String delete(@PathVariable("id") String id) {
         authorService.removeById(id);
         return "redirect:/authors";
     }

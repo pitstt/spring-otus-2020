@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Обновить данные о книге</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Обновить данные о книге:</h1>
+
+<!--
+   In Thymeleaf the equivalent of
+   JSP's ${pageContext.request.contextPath}/edit.html
+   would be @{/edit.html}
+   -->
+
+<form th:action="@{/book}"
+      th:object="${book}" method="POST">
+    Id:
+    <input readonly type="text" th:field="*{id}"/>
+    <br/>
+    Название:
+    <input type="text" th:field="*{name}"/>
+    <br/>
+    Автор:
+    <select name="author" th:field="*{author.id}">
+        <option th:each="author : ${authors}"
+                th:value="${author.id}"
+                th:text="${author.surname}"></option>
+    </select>
+    <br/>
+    Жанр:
+    <select name="genre" th:field="*{genre.id}">
+        <option th:each="genre : ${genres}"
+                th:value="${genre.id}"
+                th:text="${genre.name}"></option>
+    </select>
+    <br/>
+
+    <input type="submit" value="Update"/>
+</form>
+
+<br/>
+
+</body>
+</html>
